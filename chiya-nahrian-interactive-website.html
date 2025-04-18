@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiya Nahrian | Youth-led Initiative for Iraq & Kurdistan</title>
+    <style>
+        :root {
+            --primary-blue: #1a5f7a;
+            --secondary-blue: #0d2c3e;
+            --accent-green: #2a6852;
+            --light-bg: #f5f9fa;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 60px;
+            height: auto;
+            margin-right: 1rem;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            position: relative;
+        }
+        
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 1rem;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: var(--secondary-blue);
+            border-radius: 4px;
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        main {
+            margin-top: 80px;
+            flex: 1;
+            display: none;
+        }
+        
+        .page {
+            min-height: calc(100vh - 160px);
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Home Page / Landing Page */
+        .home-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(13, 44, 62, 0.8), rgba(13, 44, 62, 0.8)), url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            color: var(--text-light);
+            padding: 8rem 2rem;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+        
+        .mission-statement {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            max-width: 800px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .cta-button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .primary-cta {
+            background-color: var(--accent-green);
+            color: var(--text-light);
+        }
+        
+        .primary-cta:hover {
+            background-color: #1d4b3a;
+        }
+        
+        .secondary-cta {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--text-light);
+        }
+        
+        .secondary-cta:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* About Page */
+        .about-page h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .about-text {
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background-color: #ddd;
+            border-radius: 8px;
+        }
+        
+        /* Goals Page */
+        .goals-page h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .goal-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .goal-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .goal-card h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        
+        /* Focus Areas Page */
+        .focus-page h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .focus-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .focus-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-top: 4px solid var(--primary-blue);
+            transition: transform 0.3s ease;
+        }
+        
+        .focus-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .focus-card h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        /* Events Page */
+        .events-page h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .coming-soon {
+            background-color: white;
+            padding: 4rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .coming-soon h3 {
+            color: var(--accent-green);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Contact Page */
+        .contact-page h2 {
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-info {
+            line-height: 1.8;
+        }
+        
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group label {
+            font-weight: 600;
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .submit-btn:hover {
+            background-color: var(--secondary-blue);
+        }
+        
+        footer {
+            background-color: var(--secondary-blue);
+            color: var(--text-light);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 900px) {
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-container {
+                padding: 0 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: var(--primary-blue);
+                flex-direction: column;
+                display: none;
+                padding: 0;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            
+            nav ul.active {
+                display: flex;
+            }
+            
+            nav a {
+                padding: 1rem 2rem;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .logo {
+                width: 40px;
+                margin-right: 0.5rem;
+            }
+            
+            .hero {
+                padding: 6rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .mission-statement {
+                padding: 1.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .page {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="logo.jpeg" alt="Chiya Nahrian Logo" class="logo">
+                <span class="logo-text">CHIYA NAHRIAN</span>
+            </div>
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <nav>
+                <ul id="mainMenu">
+                    <li><a href="#home" class="active" data-page="home">Home</a></li>
+                    <li><a href="#about" data-page="about">About</a></li>
+                    <li><a href="#goals" data-page="goals">Goals</a></li>
+                    <li><a href="#focus" data-page="focus">Focus Areas</a></li>
+                    <li><a href="#events" data-page="events">Events</a></li>
+                    <li><a href="#contact" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Home/Landing Page -->
+        <section class="page home-page active" id="home-page">
+            <div class="hero">
+                <h1>Bridging Tradition and Innovation in Iraq and Kurdistan</h1>
+                <div class="mission-statement">
+                    <p>Chiya Nahrian is a youth-led initiative committed to advancing entrepreneurship, education, and leadership across Iraq and the Kurdistan Region. Rooted in collaboration and equity, we create shared experiences and accessible opportunities that empower local communities.</p>
+                    <p>Inspired by the enduring spirit of Kurdistan's mountains and the life-giving rivers of Mesopotamia, Chiya Nahrian celebrates the rich diversity of the region while building bridges between tradition and innovation.</p>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#about" class="cta-button primary-cta" id="learn-more-btn">Learn More</a>
+                    <a href="#contact" class="cta-button secondary-cta" id="get-involved-btn">Get Involved</a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Page -->
+        <section class="page about-page" id="about-page">
+            <h2>About Chiya Nahrian</h2>
+            <p>Chiya Nahrian, meaning "Mountain and Two Rivers," represents the geographical and cultural essence of our region.</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Our name celebrates the iconic mountains of Kurdistan and the historic rivers of Mesopotamia that have nurtured civilizations for millennia. Just as these natural landmarks have sustained life and culture, our organization aims to nurture growth and development in our communities.</p>
+                    <p>We are a youth-led organization founded on the principles of inclusivity, innovation, and cultural preservation. By connecting the rich heritage of our past with the boundless potential of our future, we aim to create a more prosperous and harmonious society for all inhabitants of Iraq and the Kurdistan Region.</p>
+                    <p>Our team consists of passionate young professionals, students, and community leaders who believe in the power of collaboration and shared vision to overcome challenges and build opportunities.</p>
+                </div>
+                <div class="about-image">
+                     <img src="logo.jpeg" alt="Chiya Nahrian Team" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Goals Page -->
+        <section class="page goals-page" id="goals-page">
+            <h2>Our Goals</h2>
+            <p>At Chiya Nahrian, we are guided by clear objectives that shape our initiatives and drive our impact.</p>
+            
+            <div class="goals-grid">
+                <div class="goal-card">
+                    <h3>Fostering Coexistence</h3>
+                    <p>We cultivate an environment of mutual recognition, respect, and inclusion among the diverse ethnic and religious communities of Iraq and the Kurdistan Region. Through dialogue and shared experiences, we work to strengthen the bonds that unite our multicultural society.</p>
+                </div>
+                
+                <div class="goal-card">
+                    <h3>Bridging the Diaspora</h3>
+                    <p>We facilitate collaboration between leaders in the diaspora and emerging students and professionals on the ground, creating meaningful exchange and shared growth. This connection allows for knowledge transfer, mentorship, and collaborative projects that benefit all parties.</p>
+                </div>
+                
+                <div class="goal-card">
+                    <h3>Empowering Innovation</h3>
+                    <p>We connect driven individuals in Iraq and Kurdistan with transformative opportunities that spark innovation, entrepreneurship, and cultural advancement. By providing resources, training, and networking, we help turn creative ideas into impactful realities.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Focus Areas Page -->
+        <section class="page focus-page" id="focus-page">
+            <h2>Focus Areas</h2>
+            <p>Our work spans several key domains where we believe we can make the most significant impact.</p>
+            
+            <div class="focus-grid">
+                <div class="focus-card">
+                    <h3>STEM</h3>
+                    <p>Promoting science, technology, engineering, and mathematics education and careers through workshops, competitions, and mentorship programs.</p>
+                </div>
+                
+                <div class="focus-card">
+                    <h3>Education</h3>
+                    <p>Enhancing access to quality education and learning opportunities through scholarships, educational resources, and innovative teaching methodologies.</p>
+                </div>
+                
+                <div class="focus-card">
+                    <h3>Entrepreneurship & Innovation</h3>
+                    <p>Supporting new business ventures and creative solutions to local challenges through incubation programs, funding opportunities, and business development training.</p>
+                </div>
+                
+                <div class="focus-card">
+                    <h3>Cultural Dialog</h3>
+                    <p>Creating platforms for meaningful conversations across diverse perspectives through forums, cultural events, and collaborative arts projects.</p>
+                </div>
+                
+                <div class="focus-card">
+                    <h3>Economic Development</h3>
+                    <p>Fostering sustainable economic growth and prosperity through skills training, market analysis, and connecting local businesses with international markets.</p>
+                </div>
+                
+                <div class="focus-card">
+                    <h3>Youth Leadership</h3>
+                    <p>Empowering young people to become leaders in their communities through leadership development programs, civic engagement initiatives, and youth-led projects.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Events Page -->
+        <section class="page events-page" id="events-page">
+            <h2>Events</h2>
+            <p>Stay informed about our upcoming events, workshops, and initiatives.</p>
+            
+            <div class="coming-soon">
+                <h3>Coming Soon</h3>
+                <p>We are currently planning our inaugural series of events and programs.</p>
+                <p>Check back soon or subscribe to our newsletter to be the first to know about upcoming opportunities!</p>
+            </div>
+        </section>
+        
+        <!-- Contact Page -->
+        <section class="page contact-page" id="contact-page">
+            <h2>Contact Us</h2>
+            <p>Get in touch with the Chiya Nahrian team to learn more about our work or explore collaboration opportunities.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Connect With Us</h3>
+                    <p>We welcome inquiries, feedback, and partnership proposals from individuals and organizations who share our vision.</p>
+                    <p><strong>Email:</strong> chianahrein@gmail.com </p>
+                    <p><strong>Phone:</strong> +964 771 989 2387</p>
+                    <!-- <p><strong>Address:</strong> Erbil, Kurdistan Region, Iraq</p> -->
+                    
+                    <div style="margin-top: 2rem;">
+                        <h3>Follow Us</h3>
+                        <p>Stay connected with us on social media for updates, stories, and opportunities.</p>
+                        <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                            <a href="#" style="color: var(--primary-blue);">Facebook</a>
+                            <a href="#" style="color: var(--primary-blue);">Twitter</a>
+                            <a href="#" style="color: var(--primary-blue);">Instagram</a>
+                            <a href="#" style="color: var(--primary-blue);">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your full name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your email address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Message subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Type your message here..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Chiya Nahrian. All rights reserved.</p>
+            <p>Dedicated to advancing entrepreneurship, education, and leadership across Iraq and the Kurdistan Region.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make main display block so pages can show
+            document.querySelector('main').style.display = 'block';
+            
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const mainMenu = document.getElementById('mainMenu');
+            
+            menuToggle.addEventListener('click', function() {
+                mainMenu.classList.toggle('active');
+            });
+            
+            // Page navigation
+            const navLinks = document.querySelectorAll('nav a');
+            const pages = document.querySelectorAll('.page');
+            
+            function navigateToPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => page.classList.remove('active'));
+                
+                // Show selected page
+                const targetPage = document.getElementById(pageId + '-page');
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                    
+                    // Update active nav link
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`nav a[data-page="${pageId}"]`);
+                    if (activeLink) {
+                        activeLink.classList.add('active');
+                    }
+                    
+                    // Close mobile menu if open
+                    mainMenu.classList.remove('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                }
+            }
+            
+            // Add click listeners to nav links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    navigateToPage(pageId);
+                    
+                    // Update URL without page reload
+                    history.pushState(null, null, '#' + pageId);
+                });
+            });
+            
+            // CTA buttons
+            document.getElementById('learn-more-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                navigateToPage('about');
+                history.pushState(null, null, '#about');
+            });
+            
+            document.getElementById('get-involved-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                navigateToPage('contact');
+                history.pushState(null, null, '#contact');
+            });
+            
+            // Check URL hash on page load
+            if (window.location.hash) {
+                const pageId = window.location.hash.substring(1);
+                navigateToPage(pageId);
+            }
+            
+            // Handle browser back/forward
+            window.addEventListener('popstate', function() {
+                if (window.location.hash) {
+                    const pageId = window.location.hash.substring(1);
+                    navigateToPage(pageId);
+                } else {
+                    navigateToPage('home');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
